@@ -1,0 +1,67 @@
+body {
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    margin: 2rem;
+}
+h1 { margin-top: 0; }
+
+.row { display: flex; gap: .5rem; margin-bottom: 1rem; }
+
+input[type="text"] { padding: .5rem; }
+
+.row input[type="text"] { flex: 1; }
+
+button { padding: .5rem .75rem; cursor: pointer; }
+
+ul { list-style: none; padding: 0; }
+
+ul li {
+    margin-bottom: 20px;
+    border: 1px solid rgba(184, 190, 184, 1);
+    padding: 5px;
+    background: rgba(250, 239, 144, 1);
+}
+
+ul li[data-completed="0"] { background: rgba(250, 239, 144, 1); }
+ul li[data-completed="1"] { background: rgba(149, 247, 185, 1); }
+
+ul li p { margin: 0; margin-bottom: 5px; }
+
+ul li p.completed::after { content: 'COMPLETADA'; margin-left: 10px; font-weight: bold; }
+
+ul li button { margin-right: 20px; }
+
+ul li div > div {
+    margin-top: 20px;
+}
+
+.title { flex: 1; }
+
+#modalTask {
+    display: block;
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0, 0.5);
+}
+
+#modalTask .modal-wrapper {
+    width: 80%;
+    margin: 30px auto 30px;
+    background: #fff;
+    padding: 30px;
+}
+
+#modalTask .modal-wrapper > div {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+#modalTask .modal-wrapper > div input[type="text"],
+#modalTask .modal-wrapper > div button { width: 100%; }
+
+#modalTask.hide {
+    display: none;
+}
