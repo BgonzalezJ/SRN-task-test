@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="vendor/codeigniter4/framework/system/Test/bootstrap.php"
+colors="true" cacheResult="false">
+<testsuites>
+<testsuite name="unit">
+<directory suffix="Test.php">app/Tests/unit</directory>
+</testsuite>
+<testsuite name="feature">
+<directory suffix="Test.php">app/Tests/feature</directory>
+</testsuite>
+</testsuites>
+<php>
+<env name="app.baseURL" value="http://localhost:8080/"/>
+<env name="CI_ENVIRONMENT" value="testing"/>
+<env name="database.default.hostname" value="db"/>
+<env name="database.default.database" value="task_db"/>
+<env name="database.default.username" value="user"/>
+<env name="database.default.password" value="password"/>
+<env name="database.default.DBDriver" value="MySQLi"/>
+</php>
+</phpunit>
