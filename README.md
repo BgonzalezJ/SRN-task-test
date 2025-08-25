@@ -40,7 +40,7 @@ $ docker compose exec app php spark migrate
 
 | Endpoint         | Método | Campos a enviar (body)                     | Headers              | Respuestas posibles |
 |-----------------|--------|-------------------------------------------|--------------------|-------------------|
-| /tasks          | GET    | -                                         | Content-Type: application/json | 200 OK → `{ "data": [ { "id": 1, "title": "Mi tarea", "completed": false, "date": "2025-08-25T03:00:00Z" } ] }`<br>404 Not Found → `{ "error": "Ocurrió un error" }` |
+| /tasks          | GET    | -                                         | Content-Type: application/json | 200 OK → ` [ { "id": 1, "title": "Mi tarea", "completed": false, "date": "2025-08-25T03:00:00Z" } ]` |
 | /tasks/{id}     | GET    | -                                         | Content-Type: application/json | 200 OK → `{ "data": { "id": 1, "title": "Mi tarea", "completed": false, "date": "2025-08-25T03:00:00Z" } }`<br>404 Not Found → `{ "error": "Ocurrió un error" }` |
 | /tasks          | POST   | `task` (string, obligatorio)             | Content-Type: application/json | 201 Created → `{ "data": { "id": 1, "title": "Mi tarea", "completed": false, "date": "2025-08-25T03:00:00Z" } }`<br>409 Conflict → `{ "error": "Ocurrió un error" }` |
 | /tasks/{id}     | PUT    | `task` (string, opcional)<br>`completed` (boolean, opcional) | Content-Type: application/json | 200 OK → `{ "data": { "id": 1, "title": "Mi tarea actualizada", "completed": true, "date": "2025-08-25T03:00:00Z" } }`<br>404 Not Found → `{ "error": "Ocurrió un error" }`<br>409 Conflict → `{ "error": "Ocurrió un error" }` |
