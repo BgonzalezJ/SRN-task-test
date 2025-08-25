@@ -110,16 +110,21 @@ class TasksController extends BaseController
         $taskTitle = isset($payload['task']) ? trim($payload['task']) : '';
         $taskCompleted = isset($payload['completed']) ? $payload['completed'] : null;
 
-        if (empty($taskTitle) || is_null($taskCompleted)) {
+        if (empty($taskTitle) && is_null($taskCompleted)) {
             return $this->response
             ->setStatusCode(ResponseInterface::HTTP_UNPROCESSABLE_ENTITY)
             ->setJSON(['error' => 'No se enviaron datos']);
         }
 
-        $data = [
-            'title' => $taskTitle,
-            'completed' => $taskCompleted,
-        ];
+        $data = [];
+
+        if (!empty($taskTitle)) {
+            $data['title'] = $taskTitle;
+        }
+
+        if (!is_null($taskCompleted)) {
+            $data['completed'] = $taskCompleted;
+        }
 
         $model = new TaskModel();
 
@@ -131,13 +136,14 @@ class TasksController extends BaseController
             ->setJSON(['error' => 'Tarea no existe']);
         }
 
-        $taskExistsByTitle = $model->where('title', $data['title'])->first();
-
-        if ($taskExistsByTitle !== null && $taskExistsByTitle['id'] !== $task['id']) {
-            return $this
-            ->response
-            ->setStatusCode(ResponseInterface::HTTP_CONFLICT)
-            ->setJSON(['error' => 'Ya existe una tarea con ese título']);
+        if (isset($data['title'])) {
+            $taskExistsByTitle = $model->where('title', $data['title'])->first();
+            if ($taskExistsByTitle !== null && $taskExistsByTitle['id'] !== $task['id']) {
+                return $this
+                ->response
+                ->setStatusCode(ResponseInterface::HTTP_CONFLICT)
+                ->setJSON(['error' => 'Ya existe una tarea con ese título']);
+            }
         }
 
         if (!$model->update($id, $data)) {
