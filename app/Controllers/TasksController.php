@@ -58,6 +58,13 @@ class TasksController extends BaseController
                 ->setJSON(['error' => 'No se enviaron datos']);
         }
 
+        if (strlen($taskTitle) < 3 || strlen($taskTitle) > 255) {
+            return $this
+                ->response
+                ->setStatusCode(ResponseInterface::HTTP_UNPROCESSABLE_ENTITY)
+                ->setJSON(['error' => 'La tarea debe tener al menos 3 carácteres (máximo 255)']);
+        }
+
         $data = [
             'title' => $taskTitle,
         ];
@@ -119,10 +126,24 @@ class TasksController extends BaseController
         $data = [];
 
         if (!empty($taskTitle)) {
+
+            if (strlen($taskTitle) < 3 || strlen($taskTitle) > 255) {
+                return $this
+                    ->response
+                    ->setStatusCode(ResponseInterface::HTTP_UNPROCESSABLE_ENTITY)
+                    ->setJSON(['error' => 'La tarea debe tener al menos 3 carácteres (máximo 255)']);
+            }
+
             $data['title'] = $taskTitle;
         }
 
         if (!is_null($taskCompleted)) {
+            if (!is_bool($taskCompleted)) {
+                return $this
+                    ->response
+                    ->setStatusCode(ResponseInterface::HTTP_UNPROCESSABLE_ENTITY)
+                    ->setJSON(['error' => 'El campo completed debe ser de tipo boolean']);
+            }
             $data['completed'] = $taskCompleted;
         }
 
