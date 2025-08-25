@@ -55,4 +55,19 @@ Los mensajes de error para la documentación son genéricos. Los endpoints puede
 - No se pudo actualizar la tarea
 - Error al guardar la tarea
 
+## Test
 
+Para ejecutar el test se deben realizar los siguientes pasos:
+
+- Copiar el archivo phpunit.xml.dist a phpunit.xml. Este archivo ya viene listo con los valores para probar.
+- Ejecutar el comando ./vendor/bin/phpunit.
+
+```bash 
+$ docker compose exec app ./vendor/bin/phpunit tests/TasksControllerTest.php
+```
+
+Los tests son los siguientes:
+
+- Crear una tarea correctamente
+- Error al crear una tarea duplicada
+- Buscar una tarea que no existe
