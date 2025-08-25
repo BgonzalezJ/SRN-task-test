@@ -46,4 +46,13 @@ $ docker compose exec app php spark migrate
 | /tasks/{id}     | PUT    | `task` (string, opcional)<br>`completed` (boolean, opcional) | Content-Type: application/json | 200 OK → `{ "data": { "id": 1, "title": "Mi tarea actualizada", "completed": true, "date": "25-08-2025 00:00:00" } }`<br>404 Not Found → `{ "error": "Ocurrió un error" }`<br>409 Conflict → `{ "error": "Ocurrió un error" }`<br>422 Unprocessable Content → `{ "error": "Faltan datos" }` |
 | /tasks/{id}     | DELETE | -                                         | Content-Type: application/json | 200 OK → `{ "data": { "delete": true } }`<br>404 Not Found → `{ "error": "Ocurrió un error" }` |
 
+Los mensajes de error para la documentación son genéricos. Los endpoints pueden responder los siguientes errores:
+
+- No se enviaron datos
+- Ya existe una tarea con ese título
+- Error al guardar la tarea
+- Tarea no existe
+- No se pudo actualizar la tarea
+- Error al guardar la tarea
+
 
